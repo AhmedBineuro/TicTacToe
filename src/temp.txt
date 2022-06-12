@@ -1,0 +1,93 @@
+//Ai functions
+        private boolean checkHorizontal(int ypos,short type) {
+            int counter = 0;
+            for (int i = 0; i < 3; i++) {
+                if (grid[i][ypos] == type)
+                    counter++;
+            }
+            if(counter>1){
+                for (int i = 0; i < 3; i++)
+                    if (grid[i][ypos] == 0) {
+                        grid[i][ypos] = 2;
+                        xTurn=true;
+                        available--;
+                        return true;
+                    }
+            }
+            return false;
+
+        }
+        private boolean checkVertical(int xpos,short type)
+        {
+            int counter=0;
+            for(int i=0;i<3;i++) {
+                if (grid[xpos][i] == type)
+                    counter++;
+            }
+            if(counter>1){
+                for(int i=0;i<3;i++)
+                    if(grid[xpos][i]==0)
+                    {
+                        grid[xpos][i]=2;
+                        xTurn=true;
+                        available--;
+                        return true;
+                    }
+            }
+            return false;
+
+        }
+        private boolean checkRightDiagonal(short type)
+        {
+            int counter=0;
+            for(int i=0;i<3;i++)
+                if(grid[i][2-i]==type)
+                    counter++;
+            if(counter>1){
+                for(int i=0;i<3;i++)
+                    if(grid[i][2-i]==0)
+                    {
+                        grid[i][2-i]=2;
+                        xTurn=true;
+                        available--;
+                        return true;
+                    }
+            }
+            return false;
+        }
+        private boolean checkLeftDiagonal(short type)
+        {
+            int counter=0;
+            for(int i=0;i<3;i++)
+                if(grid[i][i]==type)
+                    counter++;
+            if(counter>1) {
+                for (int i = 0; i < 3; i++)
+                    if (grid[i][i] == 0) {
+                        grid[i][i] = 2;
+                        xTurn = true;
+                        available--;
+                        return true;
+                    }
+            }
+            return false;
+        }
+        private void play(int x,int y)
+        {
+            if(checkHorizontal(y, (short) 1))
+                return;
+            if(checkVertical(x, (short) 1))
+                return;
+            if(checkRightDiagonal((short) 1))
+                return;
+            if(checkLeftDiagonal((short) 1))
+                return;
+            if(checkHorizontal(0, (short) 2))
+                return;
+            if(checkVertical(0, (short) 2))
+                return;
+            if(checkRightDiagonal((short) 2))
+                return;
+            if(checkLeftDiagonal((short) 2))
+                return;
+        }
